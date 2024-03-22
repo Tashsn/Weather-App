@@ -22,7 +22,8 @@ $(document).ready(() => {
 $(document).on('click', '.city', function () {
 	const city = $(this).attr('data-city');
 
-		searched.map(item => {
+	// Iterates over every city to check if is the same name and then renders forecast if true
+	searched.map(item => {
 		if (item.city === city) {
 			renderCurrentForecast(item.forecast);
 			renderFutureForecast(item.forecast);
@@ -34,7 +35,7 @@ $(document).on('click', '.city', function () {
 function saveOnLocalStorage(searched) {
 	localStorage.setItem('searched', JSON.stringify(searched));
 }
-
+// *Function to render forecast of the current day
 function renderCurrentForecast(fiveDaysForecast) {
 	$('#today').empty();
 
@@ -53,7 +54,7 @@ function renderCurrentForecast(fiveDaysForecast) {
 
 	$('#today').append(titleEl, iconEl, temperatureEl, humidityEl, windEl);
 }
-d
+
 function renderFutureForecast(fiveDaysForecast) {
 	$('#forecast').empty();
 
@@ -111,7 +112,7 @@ function addCityToCities(city, fiveDaysForecast) {
 function renderButtons() {
 	$('#history').empty();
 
-	
+	// Loops through the array of cities
 	searched.map(function (city) {
 		var btnEl = $('<button>');
 		btnEl.addClass('city btn btn-secondary btn-sm btn-block');
@@ -140,14 +141,14 @@ function initForecast(cityName, latitude, longitude) {
 		for (let i = 0; i < forecast.length; i += 8) {
 			
 			let name = response.city.name;
-			
+		
 			let timestamp = forecast[i].dt;
-			ts
+			
 			let futureForecast = [];
 
 			
 			if (i === 0) {
-				
+			
 				let currentForecast = {
 					city: cityName,
 					date: moment.unix(timestamp).format('DD/MM/YY'),
